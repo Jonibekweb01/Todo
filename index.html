@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-dars</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        body {
+            position: relative;
+        }
+
+        .btns {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="text-center h1">TODO</h1>
+
+    <form method="post" class="w-25 mx-auto js-form">
+        <div class="input-group">
+            <input class="form-control js-input" type="text">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <ul class="w-25 mx-auto js-list list-unstyled mt-3"></ul>
+
+    <div class="d-flex flex-row gap-2 justify-content-center btns">
+        <button class="btn btn-primary px-4 py-2">All <span class="js-all"></span></button>
+        <button class="btn btn-primary px-4 py-2">Complate <span class="js-complate"></span></button>
+        <button class="btn btn-primary px-4 py-2">UnComplate <span class="js-unComplate"></span></button>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
