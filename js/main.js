@@ -21,8 +21,10 @@ elForm.addEventListener("submit", function (e) {
 
     all.textContent = todos.length;
 
+
     let unComplated = todos.filter((el) => !el.isComplated)
     unComplate.textContent = unComplated.length;
+
 
     renderTodos(todos, elList);
 })
@@ -65,6 +67,14 @@ elList.addEventListener('click', function (e) {
         let findedIndex = todos.findIndex(el => el.id == toDoId)
 
         todos.splice(findedIndex, 1);
+
+
+        let complate = todos.filter(el => el.isComplated)
+        complates.textContent = complate.length;
+
+        let unComplated = todos.filter(el => !el.isComplated);
+        unComplate.textContent = unComplated.length;
+
         renderTodos(todos, elList);
     }
     if (e.target.matches('.js-checkbox')) {
@@ -73,6 +83,7 @@ elList.addEventListener('click', function (e) {
         let finded = todos.find(el => el.id == toDoid)
 
         finded.isComplated = !finded.isComplated
+
 
         let complate = todos.filter(el => el.isComplated)
         complates.textContent = complate.length;
