@@ -1,0 +1,46 @@
+body {
+  background-color: var(--body) !important;
+}
+
+h1 {
+  color: var(--title);
+}
+
+li {
+  color: var(--items);
+}
+
+.js-mode {
+  color: var(--modes) !important;
+  background-color: var(--modesColor) !important;
+}
+
+.dark {
+  --body: black;
+  --title: white;
+  --items: white;
+  --modes: white !important;
+  --modesColor: black !important;
+}
+
+/* DARK  */
+
+/* LIGHT */
+
+body {
+  background-color: var(--body) !important;
+}
+
+h1 {
+  color: var(--title);
+}
+
+li {
+  color: var(--items);
+}
+
+.light {
+  --body: white;
+  --title: black;
+  --items: black;
+}

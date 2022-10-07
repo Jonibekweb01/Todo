@@ -1,12 +1,17 @@
+const body = document.querySelector('body')
 const elForm = document.querySelector(".js-form");
 const elInput = document.querySelector(".js-input");
 const elList = document.querySelector('.js-list');
 const elBtn = document.querySelector('.js-btn');
 const all = document.querySelector('.js-all');
 const complates = document.querySelector('.js-complate')
-const unComplate = document.querySelector('.js-unComplate')
+const unComplate = document.querySelector('.js-unComplate');
+const btnAll = document.querySelector('.btns');
+const mode = document.querySelector('.js-mode')
 
-const todos = [];
+const getItem = JSON.parse(window.localStorage.getItem('list'))
+
+const todos = getItem || [];
 
 elForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -14,22 +19,30 @@ elForm.addEventListener("submit", function (e) {
     let inputVal = elInput.value;
 
     todos.push({
-        id: todos.length + 1,
+        id: todos.length ? todos[todos.length - 1].id + 1 : 1,
         text: inputVal,
         isComplated: false
     });
 
     all.textContent = todos.length;
 
-
     let unComplated = todos.filter((el) => !el.isComplated)
     unComplate.textContent = unComplated.length;
 
-
     renderTodos(todos, elList);
+
+    window.localStorage.setItem('list', JSON.stringify(todos));
 })
 
 let renderTodos = (array, node) => {
+    all.textContent = todos.length;
+
+    let complate = todos.filter(el => el.isComplated)
+    complates.textContent = complate.length;
+
+    let unComplated = todos.filter(ele => !ele.isComplated);
+    unComplate.textContent = unComplated.length;
+
     elInput.value = ''
     node.innerHTML = '';
     array.forEach(item => {
@@ -60,6 +73,8 @@ let renderTodos = (array, node) => {
     });
 }
 
+renderTodos(todos, elList);
+
 elList.addEventListener('click', function (e) {
     if (e.target.matches('.js-btn')) {
         let toDoId = e.target.dataset.toDoId;
@@ -68,14 +83,9 @@ elList.addEventListener('click', function (e) {
 
         todos.splice(findedIndex, 1);
 
-
-        let complate = todos.filter(el => el.isComplated)
-        complates.textContent = complate.length;
-
-        let unComplated = todos.filter(el => !el.isComplated);
-        unComplate.textContent = unComplated.length;
-
         renderTodos(todos, elList);
+        window.localStorage.setItem('list', JSON.stringify(todos))
+
     }
     if (e.target.matches('.js-checkbox')) {
         let toDoid = e.target.dataset.toDoId;
@@ -84,14 +94,53 @@ elList.addEventListener('click', function (e) {
 
         finded.isComplated = !finded.isComplated
 
-
-        let complate = todos.filter(el => el.isComplated)
-        complates.textContent = complate.length;
-
-        let unComplated = todos.filter(el => !el.isComplated);
-        unComplate.textContent = unComplated.length;
-
         renderTodos(todos, elList);
+        window.localStorage.setItem('list', JSON.stringify(todos))
     }
 
 })
+
+
+btnAll.addEventListener('click', function (evt) {
+    if (evt.target.matches('.js-alls')) {
+        renderTodos(todos, elList);
+    }
+    if (evt.target.matches('.js-complates')) {
+        let filteredArr = todos.filter(el => el.isComplated);
+        renderTodos(filteredArr, elList);
+    }
+    if (evt.target.matches('.js-unComplates')) {
+        let filteredArr = todos.filter(el => !el.isComplated);
+        renderTodos(filteredArr, elList);
+    }
+    if (evt.target.matches(".js-remove")) {
+        window.localStorage.removeItem('list');
+        window.location.reload();
+        renderTodos(filteredArr, elList);
+    }
+})
+
+var total = false;
+
+window.localStorage.getItem('mode');
+
+mode.addEventListener('click', function () {
+    total = !total;
+    window.localStorage.setItem('mode', total ? "dark" : "light");
+
+
+    if (window.localStorage.getItem('mode') == "dark") {
+        mode.textContent = "LIGHT";
+        body.classList.add('dark');
+        body.classList.remove('light')
+    }
+
+    else {
+        mode.textContent = "DARK";
+        body.classList.add('light');
+        body.classList.remove('dark')
+    }
+})
+
+
+
