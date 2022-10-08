@@ -125,6 +125,7 @@ btnAll.addEventListener('click', function (evt) {
 var total = false;
 modeBtn.addEventListener('click', function () {
     total = !total;
+    modeBtn.textContent = "Dark";
     window.localStorage.setItem('theme', total ? 'dark' : 'light');
     changeTheme();
 });
@@ -133,6 +134,7 @@ function changeTheme() {
     if (window.localStorage.getItem('theme') == 'dark') {
         document.body.classList.add('dark');
     } else {
+        modeBtn.textContent = "Light";
         document.body.classList.remove('dark');
     }
 }
