@@ -7,7 +7,7 @@ const all = document.querySelector('.js-all');
 const complates = document.querySelector('.js-complate')
 const unComplate = document.querySelector('.js-unComplate');
 const btnAll = document.querySelector('.btns');
-const mode = document.querySelector('.js-mode')
+const modeBtn = document.querySelector('.js-mode')
 
 const getItem = JSON.parse(window.localStorage.getItem('list'))
 
@@ -120,27 +120,23 @@ btnAll.addEventListener('click', function (evt) {
     }
 })
 
+
+
 var total = false;
-
-window.localStorage.getItem('mode');
-
-mode.addEventListener('click', function () {
+modeBtn.addEventListener('click', function () {
     total = !total;
-    window.localStorage.setItem('mode', total ? "dark" : "light");
+    window.localStorage.setItem('theme', total ? 'dark' : 'light');
+    changeTheme();
+});
 
-
-    if (window.localStorage.getItem('mode') == "dark") {
-        mode.textContent = "LIGHT";
-        body.classList.add('dark');
-        body.classList.remove('light')
+function changeTheme() {
+    if (window.localStorage.getItem('theme') == 'dark') {
+        document.body.classList.add('dark');
+    } else {
+        document.body.classList.remove('dark');
     }
-
-    else {
-        mode.textContent = "DARK";
-        body.classList.add('light');
-        body.classList.remove('dark')
-    }
-})
+}
+changeTheme();
 
 
 
